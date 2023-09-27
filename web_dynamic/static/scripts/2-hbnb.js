@@ -11,11 +11,6 @@ $(() => {
 });
 
 $.get('http://localhost:5001/api/v1/status/', function (data, status) {
-  console.log(data.status);
-  if (data.status === 'OK') {
-    $('#api_status').addClass('available');
-    console.log('class added');
-  } else {
-    $('#api_status').removeClass('available');
-  }
+  if (data.status === 'OK') { $('#api_status').addClass('available'); }
+  else { $('#api_status').removeClass('available'); }
 });

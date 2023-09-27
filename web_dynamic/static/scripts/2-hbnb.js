@@ -8,11 +8,14 @@ $(() => {
     }
     $('.amenities h4').text(Object.keys(chckd).join(', '));
   });
+});
 
-  $.ajax({
-    url: 'http://0.0.0.0:5001/api/v1/status/',
-    success: (data, tstatus, xhr) => {
-      if (tstatus === 'OK') { $('#api_status').addClass('available'); } else { $('#api_status').removeClass('available'); }
-    }
-  });
+$.get('http://localhost:5001/api/v1/status/', function (data, status) {
+  console.log(data.status);
+  if (data.status === 'OK') {
+    $('#api_status').addClass('available');
+    console.log('class added');
+  } else {
+    $('#api_status').removeClass('available');
+  }
 });

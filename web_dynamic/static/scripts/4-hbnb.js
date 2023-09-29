@@ -35,7 +35,7 @@ $(() => {
   
   $.ajax({
     type: 'POST',
-    url: 'http://0.0.0.0:5001/api/v1/places_search/',
+    url: 'http://localhost:5001/api/v1/places_search/',
     contentType: "application/json",
     data: JSON.stringify(data),
     success: function (data) {
@@ -43,12 +43,12 @@ $(() => {
     }
   });
   
-  $('button').click(function () { 
+  $('button').click(function () {
     $.ajax({
       type: 'POST',
-      url: 'http://0.0.0.0:5001/api/v1/places_search/',
+      url: 'http://localhost:5001/api/v1/places_search/',
       contentType: "application/json",
-      data: JSON.stringify({ amenities: chckd }), // this line is not expected to work but to be fixed later
+      data: JSON.stringify({ amenities: Object.values(chckd) }),
       $('article').remove();
       success: function (data) {
         for (place of data) { $('.places').append(crart(place)); }

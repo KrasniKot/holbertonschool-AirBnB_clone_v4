@@ -10,12 +10,11 @@ $(() => {
   });
 
   $.get('http://localhost:5001/api/v1/status/', function (data, status) {
-    if (data.status === 'OK') { $('#api_status').addClass('available'); }
-    else { $('#api_status').removeClass('available'); }
+    if (data.status === 'OK') { $('#api_status').addClass('available'); } else { $('#api_status').removeClass('available'); }
   });
-  
-  function crart(place) {
-    article = `
+
+  function crart (place) {
+    const article = `
       <article>
         <div class="title_box">
           <h2>${place.name}</h2>
@@ -29,29 +28,29 @@ $(() => {
         <div class="description">${place.description}</div>
       </article>
     `;
-  
+
     return article;
   }
-  
+
   $.ajax({
     type: 'POST',
     url: 'http://localhost:5001/api/v1/places_search/',
-    contentType: "application/json",
-    data: JSON.stringify(data),
+    contentType: 'application/json',
+    data: JSON.stringify({}),
     success: function (data) {
-      for (place of data) { $('.places').append(crart(place)); }
+      for (const place of data) { $('.places').append(crart(place)); }
     }
   });
-  
+
   $('button').click(function () {
+    $('article').remove();
     $.ajax({
       type: 'POST',
       url: 'http://localhost:5001/api/v1/places_search/',
-      contentType: "application/json",
+      contentType: 'application/json',
       data: JSON.stringify({ amenities: Object.values(chckd) }),
-      $('article').remove();
       success: function (data) {
-        for (place of data) { $('.places').append(crart(place)); }
+        for (const place of data) { $('.places').append(crart(place)); }
       }
     });
   });
